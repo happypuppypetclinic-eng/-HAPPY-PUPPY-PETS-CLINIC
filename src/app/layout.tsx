@@ -6,10 +6,10 @@ import Footer from '@/components/layout/Footer';
 import { clinicData } from '@/config/clinic';
 
 const inter = Inter({ subsets: ['latin'] });
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://happypuppypetsclinic.com";
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://happypuppypetsclinic.com"),
+  metadataBase: new URL(siteUrl),
   title: {
     default: 'Happy Puppy Pets Clinic | Veterinary Clinic in Ulwe, Navi Mumbai',
     template: '%s | Happy Puppy Pets Clinic',
