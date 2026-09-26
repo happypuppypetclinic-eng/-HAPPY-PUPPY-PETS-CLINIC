@@ -1,36 +1,48 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Happy Puppy Pets Clinic Website
 
-## Getting Started
+This is a production-ready Next.js 14 project built for Happy Puppy Pets Clinic, utilizing the App Router, Tailwind CSS (v4), Framer Motion, and TypeScript.
 
-First, run the development server:
+## Quick Start
+**Install Dependencies:**
+\`\`\`bash
+npm install
+\`\`\`
 
-```bash
+**Development Server:**
+\`\`\`bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+\`\`\`
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+**Production Build:**
+\`\`\`bash
+npm run build
+\`\`\`
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+**Production Start:**
+\`\`\`bash
+npm run start
+\`\`\`
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Environment Variables
+Before deploying (e.g., to Vercel or Netlify), you must configure the following environment variables in your hosting provider's dashboard:
 
-## Learn More
+* `NEXT_PUBLIC_SITE_URL`: The final production domain (e.g., `https://www.happypuppypetsclinic.com`). *Required for sitemap, robots.txt, and SEO metadata.*
+* `NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY`: The access key from Web3Forms for the appointment enquiry form.
 
-To learn more about Next.js, take a look at the following resources:
+*Note: For local testing, rename `.env.local.example` to `.env.local` and add your test keys. Do NOT commit `.env.local` to version control.*
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Client Assets & Information to Add
+Before final launch, the following placeholders must be replaced by the client/developer:
+* **Images:** Place real `.jpg` files in `public/images/` matching the exact filenames listed on the gray placeholder boxes on the live site (e.g., `hero-pet.jpg`, `dr-dinesh-kumar.jpg`).
+* **Logo:** Replace `public/images/logo.png` with the high-res client logo.
+* **SEO Image:** Replace `public/images/seo/og-image.jpg` with a 1200x630 banner for social media sharing.
+* **Configuration (`src/config/clinic.ts`):** 
+  * Update clinic timings.
+  * Add Instagram and Facebook URLs (buttons will automatically appear when populated).
+  * Add Google Business Profile URL.
+  * Replace the `NEXT_PUBLIC_SITE_URL` in your `.env` once the domain is purchased.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Technical Notes
+* The Contact Form uses Web3Forms and acts strictly as an **enquiry** system to prevent false booking confirmations. If the submission fails, a pre-filled WhatsApp fallback link is generated.
+* Google Maps embeds are configured for both the Ulwe (Main) and Karanjade branch locations.
+* Excluded services (Physiotherapy, Grooming, etc.) have been strictly omitted.
