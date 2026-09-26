@@ -6,7 +6,10 @@ import Footer from '@/components/layout/Footer';
 import { clinicData } from '@/config/clinic';
 
 const inter = Inter({ subsets: ['latin'] });
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://happypuppypetsclinic.com";
+let siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://happypuppypetsclinic.com";
+if (!siteUrl.startsWith('http')) {
+  siteUrl = `https://${siteUrl}`; // Automatically adds https:// if it was missing in Vercel
+}
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),

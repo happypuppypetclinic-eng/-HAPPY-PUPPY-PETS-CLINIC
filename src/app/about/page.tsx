@@ -106,7 +106,7 @@ export default function AboutPage() {
               className="md:col-span-2"
             >
               {/* TODO: Replace ImagePlaceholder with <Image src="/images/doctor/dr-dinesh-kumar.jpg" /> */}
-              <ImagePlaceholder filename="/images/doctor/dr-dinesh-kumar.jpg" className="w-full aspect-[4/5] shadow-sm rounded-2xl" />
+              <ImagePlaceholder filename="/images/about/dr-dinesh-kumar.jpg" className="w-full aspect-[4/5] shadow-sm rounded-2xl" />
             </motion.div>
             <motion.div 
               {...fadeInUp}
