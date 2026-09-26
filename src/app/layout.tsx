@@ -9,7 +9,7 @@ const inter = Inter({ subsets: ['latin'] });
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
 
 export const metadata: Metadata = {
-  metadataBase: new URL(siteUrl),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://happypuppypetsclinic.com"),
   title: {
     default: 'Happy Puppy Pets Clinic | Veterinary Clinic in Ulwe, Navi Mumbai',
     template: '%s | Happy Puppy Pets Clinic',
