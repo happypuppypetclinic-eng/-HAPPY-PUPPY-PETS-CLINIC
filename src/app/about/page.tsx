@@ -246,54 +246,63 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* 7. LOCATION / SERVICE AREA */}
-      <section className="py-20 md:py-32 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-12 items-center">
-          <motion.div {...fadeInUp}>
-            <h2 className="text-3xl md:text-4xl font-bold text-primary mb-6">Serving Pet Parents in {clinicData.address.short.split(',')[0]}</h2>
-            <p className="text-lg text-textLight mb-8 leading-relaxed">
-              {clinicData.name} is located in {clinicData.address.short}, making veterinary consultation and pet care services accessible to local pet families.
-            </p>
-            
-            <div className="space-y-4 mb-8 bg-secondary p-6 rounded-2xl border border-gray-50">
-              <div className="flex items-start text-textLight">
-                <MapPin className="w-6 h-6 text-accent mr-4 shrink-0 mt-1" />
-                <p className="leading-relaxed font-medium">{clinicData.address.full}</p>
-              </div>
-              <div className="flex items-center text-textLight">
-                <PhoneCall className="w-6 h-6 text-accent mr-4 shrink-0" />
-                <p className="font-medium">{clinicData.phone}</p>
-              </div>
-              <div className="flex items-center text-textLight">
-                <Mail className="w-6 h-6 text-accent mr-4 shrink-0" />
-                <p className="font-medium">{clinicData.email}</p>
-              </div>
-            </div>
-
-            <div className="flex flex-wrap gap-4">
-              <BaseButton asAnchor href={clinicData.links.googleMapsDirections} target="_blank" rel="noopener noreferrer" variant="primary">
-                Get Directions
-              </BaseButton>
-              <CallButton />
-              <WhatsAppButton />
-            </div>
-          </motion.div>
-
+      {/* GLOBAL MULTI-LOCATION CTA */}
+      <section className="py-16 bg-secondary border-t border-gray-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div 
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="w-full h-96 bg-gray-200 rounded-3xl overflow-hidden shadow-inner border border-gray-100"
+            initial={{ opacity: 0, y: 20 }} 
+            whileInView={{ opacity: 1, y: 0 }} 
+            viewport={{ once: true }} 
+            className="text-center mb-12"
           >
-            <iframe 
-              src={clinicData.links.googleMapsEmbed} 
-              className="w-full h-full border-0" 
-              allowFullScreen={false} 
-              loading="lazy" 
-              referrerPolicy="no-referrer-when-downgrade"
-              title="Google Maps Location for Happy Puppy Pets Clinic"
-            ></iframe>
+            <h2 className="text-3xl font-bold text-primary mb-4">Visit Our Clinics</h2>
+            <p className="text-textLight text-lg max-w-2xl mx-auto">We are proud to serve pet families at two convenient locations in Navi Mumbai and Panvel.</p>
           </motion.div>
+          
+          <div className="grid lg:grid-cols-2 gap-10">
+            {clinicData.locations.map((location, index) => (
+              <motion.div 
+                key={location.id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                className="bg-white rounded-3xl overflow-hidden shadow-soft border border-gray-100 flex flex-col"
+              >
+                <div className="p-8 flex-grow">
+                  <h3 className="text-2xl font-bold text-primary mb-6">{location.name}</h3>
+                  <div className="space-y-4 mb-8">
+                    <div className="flex items-start text-textLight">
+                      <MapPin className="w-5 h-5 text-accent mr-4 shrink-0 mt-1" />
+                      <p className="leading-relaxed text-sm font-medium">{location.address}</p>
+                    </div>
+                    <div className="flex items-center text-textLight">
+                      <PhoneCall className="w-5 h-5 text-accent mr-4 shrink-0" />
+                      <p className="text-sm font-medium">{location.phone}</p>
+                    </div>
+                  </div>
+                  <div className="flex flex-wrap gap-4">
+                    <BaseButton asAnchor href={location.mapDirections} target="_blank" rel="noopener noreferrer" className="flex-1 min-w-[140px] text-sm">
+                      Directions
+                    </BaseButton>
+                    <CallButton className="flex-1 min-w-[140px] text-sm" />
+                  </div>
+                </div>
+                
+                {/* Map Iframe */}
+                <div className="w-full h-56 bg-gray-100 relative border-t border-gray-100">
+                  <iframe 
+                    src={location.mapEmbed} 
+                    className="absolute inset-0 w-full h-full border-0" 
+                    allowFullScreen={false} 
+                    loading="lazy" 
+                    referrerPolicy="no-referrer-when-downgrade"
+                    title={`Google Maps Location for ${location.name}`}
+                  ></iframe>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 

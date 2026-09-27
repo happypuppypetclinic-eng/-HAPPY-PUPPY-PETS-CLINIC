@@ -33,15 +33,25 @@ export default function Footer() {
           </div>
 
           {/* Contact */}
+          {/* Contact Us Column */}
           <div>
-            <h4 className="text-lg font-semibold mb-4 text-accent">Contact Us</h4>
-            <ul className="space-y-3 text-blue-200">
-              <li>{clinicData.address.full}</li>
-              <li><a href={`tel:${clinicData.phone.replace(/[^0-9+]/g, '')}`} className="hover:text-white transition-colors">{clinicData.phone}</a></li>
-              <li><a href={`mailto:${clinicData.email}`} className="hover:text-white transition-colors">{clinicData.email}</a></li>
-            </ul>
-            <div className="mt-6">
-              <CallButton variant="white" className="w-full" />
+            <h4 className="text-lg font-bold text-accent mb-6">Contact Us</h4>
+            <div className="space-y-6">
+              {clinicData.locations.map((loc) => (
+                <div key={loc.id} className="space-y-2">
+                  <h5 className="font-semibold text-white">{loc.name}</h5>
+                  <p className="text-gray-300 text-sm leading-relaxed">{loc.address}</p>
+                  <a href={`tel:${loc.phone.replace(/[^0-9+]/g, '')}`} className="text-gray-300 hover:text-white block text-sm transition-colors">
+                    {loc.phone}
+                  </a>
+                </div>
+              ))}
+              <div className="pt-2 border-t border-white/10">
+                <a href={`mailto:${clinicData.email}`} className="text-gray-300 hover:text-white text-sm transition-colors">
+                  {clinicData.email}
+                </a>
+              </div>
+              <CallButton variant="white" className="w-full mt-4" />
             </div>
           </div>
         </div>

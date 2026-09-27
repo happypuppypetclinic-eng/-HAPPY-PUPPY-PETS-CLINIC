@@ -251,50 +251,62 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* 7. LOCATION / CONTACT MINI CTA */}
-      {/* 7. LOCATION / CONTACT MINI CTA */}
-      <section className="py-16 bg-white border-t border-gray-100">
+      {/* GLOBAL MULTI-LOCATION CTA */}
+      <section className="py-16 bg-secondary border-t border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-2 gap-12 items-center bg-secondary p-8 md:p-12 rounded-3xl shadow-soft">
-            <motion.div {...fadeInUp}>
-              <h2 className="text-2xl md:text-3xl font-bold text-primary mb-6">Visit {clinicData.name}</h2>
-              <div className="space-y-4 mb-8">
-                <div className="flex items-start text-textLight">
-                  <MapPin className="w-5 h-5 text-accent mr-4 shrink-0 mt-1" />
-                  <p className="leading-relaxed">{clinicData.address.full}</p>
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }} 
+            whileInView={{ opacity: 1, y: 0 }} 
+            viewport={{ once: true }} 
+            className="text-center mb-12"
+          >
+            <h2 className="text-3xl font-bold text-primary mb-4">Visit Our Clinics</h2>
+            <p className="text-textLight text-lg max-w-2xl mx-auto">We are proud to serve pet families at two convenient locations in Navi Mumbai and Panvel.</p>
+          </motion.div>
+          
+          <div className="grid lg:grid-cols-2 gap-10">
+            {clinicData.locations.map((location, index) => (
+              <motion.div 
+                key={location.id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                className="bg-white rounded-3xl overflow-hidden shadow-soft border border-gray-100 flex flex-col"
+              >
+                <div className="p-8 flex-grow">
+                  <h3 className="text-2xl font-bold text-primary mb-6">{location.name}</h3>
+                  <div className="space-y-4 mb-8">
+                    <div className="flex items-start text-textLight">
+                      <MapPin className="w-5 h-5 text-accent mr-4 shrink-0 mt-1" />
+                      <p className="leading-relaxed text-sm font-medium">{location.address}</p>
+                    </div>
+                    <div className="flex items-center text-textLight">
+                      <PhoneCall className="w-5 h-5 text-accent mr-4 shrink-0" />
+                      <p className="text-sm font-medium">{location.phone}</p>
+                    </div>
+                  </div>
+                  <div className="flex flex-wrap gap-4">
+                    <BaseButton asAnchor href={location.mapDirections} target="_blank" rel="noopener noreferrer" className="flex-1 min-w-[140px] text-sm">
+                      Directions
+                    </BaseButton>
+                    <CallButton className="flex-1 min-w-[140px] text-sm" />
+                  </div>
                 </div>
-                <div className="flex items-center text-textLight">
-                  <PhoneCall className="w-5 h-5 text-accent mr-4 shrink-0" />
-                  <p>{clinicData.phone}</p>
+                
+                {/* Map Iframe */}
+                <div className="w-full h-56 bg-gray-100 relative border-t border-gray-100">
+                  <iframe 
+                    src={location.mapEmbed} 
+                    className="absolute inset-0 w-full h-full border-0" 
+                    allowFullScreen={false} 
+                    loading="lazy" 
+                    referrerPolicy="no-referrer-when-downgrade"
+                    title={`Google Maps Location for ${location.name}`}
+                  ></iframe>
                 </div>
-                <div className="flex items-center text-textLight">
-                  <Mail className="w-5 h-5 text-accent mr-4 shrink-0" />
-                  <p>{clinicData.email}</p>
-                </div>
-              </div>
-              <div className="flex flex-wrap gap-4">
-                <BaseButton asAnchor href={clinicData.links.googleMapsDirections} target="_blank" rel="noopener noreferrer" variant="primary">
-                  Get Directions
-                </BaseButton>
-                <BaseButton asAnchor href="/contact" variant="outline">Contact Us</BaseButton>
-              </div>
-            </motion.div>
-            
-            <motion.div 
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              className="w-full h-72 bg-gray-200 rounded-2xl overflow-hidden shadow-inner border border-gray-300"
-            >
-              <iframe 
-                src={clinicData.links.googleMapsEmbed} 
-                className="w-full h-full border-0" 
-                allowFullScreen={false} 
-                loading="lazy" 
-                referrerPolicy="no-referrer-when-downgrade"
-                title="Google Maps Location for Happy Puppy Pets Clinic"
-              ></iframe>
-            </motion.div>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>

@@ -125,15 +125,20 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* 5. GOOGLE MAPS / MULTIPLE LOCATIONS */}
-      <section className="py-20 bg-secondary border-t border-gray-100">
+      {/* GLOBAL MULTI-LOCATION CTA */}
+      <section className="py-16 bg-secondary border-t border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div {...fadeInUp} className="text-center mb-16">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }} 
+            whileInView={{ opacity: 1, y: 0 }} 
+            viewport={{ once: true }} 
+            className="text-center mb-12"
+          >
             <h2 className="text-3xl font-bold text-primary mb-4">Visit Our Clinics</h2>
             <p className="text-textLight text-lg max-w-2xl mx-auto">We are proud to serve pet families at two convenient locations in Navi Mumbai and Panvel.</p>
           </motion.div>
           
-          <div className="grid lg:grid-cols-2 gap-12">
+          <div className="grid lg:grid-cols-2 gap-10">
             {clinicData.locations.map((location, index) => (
               <motion.div 
                 key={location.id}
@@ -143,28 +148,28 @@ export default function ContactPage() {
                 transition={{ delay: index * 0.1 }}
                 className="bg-white rounded-3xl overflow-hidden shadow-soft border border-gray-100 flex flex-col"
               >
-                {/* Location Details */}
-                <div className="p-8 md:p-10 grow">
+                <div className="p-8 flex-grow">
                   <h3 className="text-2xl font-bold text-primary mb-6">{location.name}</h3>
                   <div className="space-y-4 mb-8">
                     <div className="flex items-start text-textLight">
-                      <MapPin className="w-6 h-6 text-accent mr-4 shrink-0 mt-1" />
-                      <p className="leading-relaxed font-medium">{location.address}</p>
+                      <MapPin className="w-5 h-5 text-accent mr-4 shrink-0 mt-1" />
+                      <p className="leading-relaxed text-sm font-medium">{location.address}</p>
                     </div>
                     <div className="flex items-center text-textLight">
-                      <PhoneCall className="w-6 h-6 text-accent mr-4 shrink-0" />
-                      <p className="font-medium">{location.phone}</p>
+                      <PhoneCall className="w-5 h-5 text-accent mr-4 shrink-0" />
+                      <p className="text-sm font-medium">{location.phone}</p>
                     </div>
                   </div>
-                  <div>
-                    <BaseButton asAnchor href={location.mapDirections} target="_blank" rel="noopener noreferrer">
-                      Get Directions
+                  <div className="flex flex-wrap gap-4">
+                    <BaseButton asAnchor href={location.mapDirections} target="_blank" rel="noopener noreferrer" className="flex-1 min-w-[140px] text-sm">
+                      Directions
                     </BaseButton>
+                    <CallButton className="flex-1 min-w-[140px] text-sm" />
                   </div>
                 </div>
-
+                
                 {/* Map Iframe */}
-                <div className="w-full h-64 bg-gray-100 relative">
+                <div className="w-full h-56 bg-gray-100 relative border-t border-gray-100">
                   <iframe 
                     src={location.mapEmbed} 
                     className="absolute inset-0 w-full h-full border-0" 

@@ -260,50 +260,63 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 9. LOCATION PREVIEW */}
-      <section className="py-20 bg-secondary border-t border-gray-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-12 items-center">
-          <motion.div {...fadeInUp}>
-            <h2 className="text-3xl font-bold text-primary mb-6">Visit Our Clinics</h2>
-            <p className="text-lg text-textLight mb-8">We are proud to serve pet families at two convenient locations in Navi Mumbai and Panvel.</p>
-            
-            <div className="space-y-6 mb-8">
-              {clinicData.locations.map((loc) => (
-                <div key={loc.id} className="flex items-start text-textLight">
-                  <MapPin className="w-6 h-6 text-accent mr-4 shrink-0 mt-1" />
-                  <div>
-                    <h4 className="font-bold text-primary">{loc.name}</h4>
-                    <p className="leading-relaxed max-w-sm text-sm mt-1">{loc.address}</p>
-                    <p className="font-medium text-sm mt-1 text-primary">{loc.phone}</p>
+      {/* GLOBAL MULTI-LOCATION CTA */}
+      <section className="py-16 bg-secondary border-t border-gray-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }} 
+            whileInView={{ opacity: 1, y: 0 }} 
+            viewport={{ once: true }} 
+            className="text-center mb-12"
+          >
+            <h2 className="text-3xl font-bold text-primary mb-4">Visit Our Clinics</h2>
+            <p className="text-textLight text-lg max-w-2xl mx-auto">We are proud to serve pet families at two convenient locations in Navi Mumbai and Panvel.</p>
+          </motion.div>
+          
+          <div className="grid lg:grid-cols-2 gap-10">
+            {clinicData.locations.map((location, index) => (
+              <motion.div 
+                key={location.id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                className="bg-white rounded-3xl overflow-hidden shadow-soft border border-gray-100 flex flex-col"
+              >
+                <div className="p-8 flex-grow">
+                  <h3 className="text-2xl font-bold text-primary mb-6">{location.name}</h3>
+                  <div className="space-y-4 mb-8">
+                    <div className="flex items-start text-textLight">
+                      <MapPin className="w-5 h-5 text-accent mr-4 shrink-0 mt-1" />
+                      <p className="leading-relaxed text-sm font-medium">{location.address}</p>
+                    </div>
+                    <div className="flex items-center text-textLight">
+                      <PhoneCall className="w-5 h-5 text-accent mr-4 shrink-0" />
+                      <p className="text-sm font-medium">{location.phone}</p>
+                    </div>
+                  </div>
+                  <div className="flex flex-wrap gap-4">
+                    <BaseButton asAnchor href={location.mapDirections} target="_blank" rel="noopener noreferrer" className="flex-1 min-w-[140px] text-sm">
+                      Directions
+                    </BaseButton>
+                    <CallButton className="flex-1 min-w-[140px] text-sm" />
                   </div>
                 </div>
-              ))}
-            </div>
-
-            <div className="flex gap-4">
-              <BaseButton asAnchor href="/contact" variant="primary">
-                View All Locations & Maps
-              </BaseButton>
-            </div>
-          </motion.div>
-
-          <motion.div 
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="w-full h-[400px] bg-gray-200 rounded-2xl overflow-hidden shadow-inner relative"
-          >
-            {/* We show the Primary (Ulwe) Map here to save loading time */}
-            
-            <iframe 
-              src={clinicData.locations[0].mapEmbed} 
-              className="w-full h-full border-0" 
-              allowFullScreen={false} 
-              loading="lazy" 
-              referrerPolicy="no-referrer-when-downgrade"
-              title="Google Maps Location for Ulwe Clinic"
-            ></iframe>
-          </motion.div>
+                
+                {/* Map Iframe */}
+                <div className="w-full h-56 bg-gray-100 relative border-t border-gray-100">
+                  <iframe 
+                    src={location.mapEmbed} 
+                    className="absolute inset-0 w-full h-full border-0" 
+                    allowFullScreen={false} 
+                    loading="lazy" 
+                    referrerPolicy="no-referrer-when-downgrade"
+                    title={`Google Maps Location for ${location.name}`}
+                  ></iframe>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 
