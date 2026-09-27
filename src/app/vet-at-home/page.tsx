@@ -98,7 +98,7 @@ export default function VetAtHomePage() {
                 A home visit provides a convenient way to discuss your pet&apos;s health directly with a veterinarian in a familiar, stress-free environment.
               </p>
             </div>
-            <BaseButton asAnchor href="/contact?service=Veterinary+Home+Visits" variant="primary" variant="outline" className="group">
+            <BaseButton asAnchor href="/contact?service=Veterinary+Home+Visits" variant="primary" className="group">
               Enquire for a Home Visit
               <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
             </BaseButton>
