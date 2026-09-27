@@ -299,7 +299,7 @@ export default function HomePage() {
                     <BaseButton asAnchor href={location.mapDirections} target="_blank" rel="noopener noreferrer" className="flex-1 min-w-[140px] text-sm">
                       Directions
                     </BaseButton>
-                    <CallButton className="flex-1 min-w-[140px] text-sm" />
+                    <CallButton phone={location.phone} className="flex-1 min-w-[140px] text-sm" />
                   </div>
                 </div>
                 

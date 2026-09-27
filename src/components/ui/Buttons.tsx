@@ -46,12 +46,15 @@ export const BaseButton = ({ children, variant = 'primary', className = '', asAn
   );
 };
 
-export const CallButton = ({ className, variant = 'primary' }: { className?: string, variant?: ButtonProps['variant'] }) => (
-  <BaseButton asAnchor href={`tel:${clinicData.phone.replace(/[^0-9+]/g, '')}`} variant={variant} className={className}>
-    <Phone className="w-4 h-4 mr-2" />
-    Call Now
-  </BaseButton>
-);
+export const CallButton = ({ className, variant = 'primary', phone }: { className?: string, variant?: ButtonProps['variant'], phone?: string }) => {
+  const targetPhone = phone || clinicData.phone;
+  return (
+    <BaseButton asAnchor href={`tel:${targetPhone.replace(/[^0-9+]/g, '')}`} variant={variant} className={className}>
+      <Phone className="w-4 h-4 mr-2" />
+      Call Now
+    </BaseButton>
+  );
+};
 
 export const WhatsAppButton = ({ className }: { className?: string }) => (
   <BaseButton asAnchor href={clinicData.links.whatsapp} target="_blank" rel="noopener noreferrer" variant="whatsapp" className={className}>
