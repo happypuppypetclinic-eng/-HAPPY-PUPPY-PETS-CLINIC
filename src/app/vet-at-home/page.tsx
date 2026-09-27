@@ -51,7 +51,7 @@ export default function VetAtHomePage() {
               {clinicData.name} offers veterinary home visits for pet parents in {clinicData.address.short} who prefer consultation and care in their pet&apos;s familiar surroundings.
             </p>
             <div className="flex flex-col sm:flex-row items-center gap-4 justify-center md:justify-start">
-              <BaseButton asAnchor href="/contact" className="w-full sm:w-auto">
+              <BaseButton asAnchor href="/contact?service=Veterinary+Home+Visits" variant="primary" className="w-full sm:w-auto">
                 Book a Home Visit
               </BaseButton>
               <WhatsAppButton className="w-full sm:w-auto" />
@@ -98,7 +98,7 @@ export default function VetAtHomePage() {
                 A home visit provides a convenient way to discuss your pet&apos;s health directly with a veterinarian in a familiar, stress-free environment.
               </p>
             </div>
-            <BaseButton asAnchor href="/contact" variant="outline" className="group">
+            <BaseButton asAnchor href="/contact?service=Veterinary+Home+Visits" variant="primary" variant="outline" className="group">
               Enquire for a Home Visit
               <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
             </BaseButton>
@@ -262,7 +262,7 @@ export default function VetAtHomePage() {
               Contact {clinicData.name} to enquire about availability and schedule a suitable consultation.
             </p>
             <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
-              <BaseButton asAnchor href="/contact" className="w-full sm:w-auto">Book a Home Visit</BaseButton>
+              <BaseButton asAnchor href="/contact?service=Veterinary+Home+Visits" variant="primary" className="w-full sm:w-auto">Book a Home Visit</BaseButton>
               <WhatsAppButton className="w-full sm:w-auto" />
               <CallButton className="w-full sm:w-auto" />
             </div>

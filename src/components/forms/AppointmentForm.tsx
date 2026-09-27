@@ -26,6 +26,13 @@ export default function AppointmentForm() {
   useEffect(() => {
     const today = new Date().toISOString().split("T")[0];
     setMinDate(today);
+
+    // NEW: Check the URL for a pre-selected service
+    const params = new URLSearchParams(window.location.search);
+    const serviceParam = params.get('service');
+    if (serviceParam) {
+      setFormData(prev => ({ ...prev, service: serviceParam }));
+    }
   }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
