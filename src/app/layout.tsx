@@ -1,12 +1,15 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
+import Script from 'next/script';
 import './globals.css';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import { clinicData } from '@/config/clinic';
 
 const inter = Inter({ subsets: ['latin'] });
-const siteUrl = "https://happypuppypetsclinic.com";
+
+const siteUrl = 'https://happypuppypetsclinic.com';
+const googleAdsTagId = 'AW-18511084219';
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -14,14 +17,17 @@ export const metadata: Metadata = {
     default: 'Happy Puppy Pets Clinic | Veterinary Clinic in Ulwe, Navi Mumbai',
     template: '%s | Happy Puppy Pets Clinic',
   },
-  description: 'Happy Puppy Pets Clinic provides veterinary consultation, pet health care and home visit services for pets and their families in Ulwe, Navi Mumbai.',
-  keywords: 'veterinary clinic in Ulwe, pet clinic in Ulwe, veterinarian in Ulwe, pet care in Navi Mumbai, home visit veterinarian in Ulwe',
+  description:
+    'Happy Puppy Pets Clinic provides veterinary consultation, pet health care and home visit services for pets and their families in Ulwe, Navi Mumbai.',
+  keywords:
+    'veterinary clinic in Ulwe, pet clinic in Ulwe, veterinarian in Ulwe, pet care in Navi Mumbai, home visit veterinarian in Ulwe',
   alternates: {
     canonical: '/',
   },
   openGraph: {
     title: 'Happy Puppy Pets Clinic | Veterinary Clinic in Ulwe',
-    description: 'Happy Puppy Pets Clinic provides veterinary consultation, pet health care and home visit services for pets in Ulwe, Navi Mumbai.',
+    description:
+      'Happy Puppy Pets Clinic provides veterinary consultation, pet health care and home visit services for pets in Ulwe, Navi Mumbai.',
     url: siteUrl,
     siteName: 'HAPPY PUPPY PETS CLINIC',
     images: [
@@ -38,13 +44,17 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Happy Puppy Pets Clinic | Veterinary Clinic in Ulwe',
-    description: 'Professional veterinary consultation and pet health care in Ulwe, Navi Mumbai.',
+    description:
+      'Professional veterinary consultation and pet health care in Ulwe, Navi Mumbai.',
     images: ['/images/seo/og-image.jpg'],
   },
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
-  // Schema.org JSON-LD structured data for Local Veterinary Business
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'VeterinaryCare',
@@ -55,11 +65,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     email: clinicData.email,
     address: {
       '@type': 'PostalAddress',
-      streetAddress: 'Dream Home, Shop No. 1/2, Plot No. 158, Sector 19, Opp. Om Sai Hospital',
+      streetAddress:
+        'Dream Home, Shop No. 1/2, Plot No. 158, Sector 19, Opp. Om Sai Hospital',
       addressLocality: 'Ulwe, Navi Mumbai',
       postalCode: '410206',
       addressRegion: 'Maharashtra',
-      addressCountry: 'IN'
+      addressCountry: 'IN',
     },
     areaServed: ['Ulwe', 'Navi Mumbai'],
   };
@@ -71,12 +82,25 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
+
+        {/* Google Ads tag */}
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${googleAdsTagId}`}
+          strategy="afterInteractive"
+        />
+        <Script id="google-ads-tag" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){window.dataLayer.push(arguments);}
+            window.gtag = gtag;
+            gtag('js', new Date());
+            gtag('config', '${googleAdsTagId}');
+          `}
+        </Script>
       </head>
       <body className={`${inter.className} min-h-screen flex flex-col`}>
         <Navbar />
-        <main className="flex-grow">
-          {children}
-        </main>
+        <main className="flex-grow">{children}</main>
         <Footer />
       </body>
     </html>
